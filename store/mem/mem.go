@@ -56,6 +56,7 @@ func (m *store) Get(s string) (ukjent.Word, error) {
 
 func (m *store) GetAll() []ukjent.Word {
 	words := make([]ukjent.Word, 0)
+	defer m.withRead()()
 	for k, v := range m.data {
 		words = append(words, word(k, v.translation, v.note))
 	}
